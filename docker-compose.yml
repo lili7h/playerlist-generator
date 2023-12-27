@@ -1,0 +1,5 @@
+services:
+  mac-list-api:
+    build: .
+    ports:
+      - "4090:4090"
