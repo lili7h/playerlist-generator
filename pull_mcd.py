@@ -33,7 +33,6 @@ def parse_html(html: str) -> list[dict]:
     _players = _js[_js.index(_open_str) + len(_open_str):_js.index(_close_str)-4]
     logger.success(f"Done.")
     logger.info(f"Extracting {len(_players)} characters of JS variables into a native dictionary...")
-    logger.info(f"\t -> ", end='')
     # json5 loads absolutely slaughters the interpreter performance on js objs of this size
     _dict = json5.loads(_players)
     logger.success(f"Done.")
