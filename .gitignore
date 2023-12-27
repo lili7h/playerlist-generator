@@ -1,0 +1,6 @@
+library/
+playerlist.json
+cache/playerlist.json
+**/__pycache__/
+.idea/
+.vscode/
