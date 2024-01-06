@@ -18,14 +18,29 @@ def get_data(url: str) -> dict:
     return response.json()
 
 
-def convert_data(players: dict) -> dict:
+def convert_data(players: dict, *, custom_note: str = None) -> dict:
     logger.info(f"Transforming {len(players)} player objects into MAC Client format...")
+    _note = 'Auto-extracted from pull_tacobot.py' if custom_note is None else custom_note
     _player_records = {'records': {}}
     for player in players:
+        _prevs: list[str]
+        _custom_note = _note
+
+        if 'last_seen' in player and 'player_name' in player['last_seen']:
+            _prevs = player['last_seen']['player_name']
+        else:
+            _prevs = []
+
+        if 'cheater' in player["attributes"]:
+            _verdict = 'Cheater'
+        else:
+            _verdict = 'Player'
+            _note = "Marked for: " + ", ".join(player["attributes"])
+
         _player_records['records'][convert_sid3_to_sid64(player['steamid'])] = {
-            'custom_data': {'playerNote': 'Auto-extracted from pull_tacobot.py'},
-            'verdict': 'Cheater',
-            'previous_names': []
+            'custom_data': {'playerNote': _note},
+            'verdict': _verdict,
+            'previous_names': _prevs
         }
     logger.success("Done.")
     return _player_records
