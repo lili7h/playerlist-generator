@@ -27,7 +27,7 @@ def convert_data(players: dict, *, custom_note: str = None) -> dict:
         _custom_note = _note
 
         if 'last_seen' in player and 'player_name' in player['last_seen']:
-            _prevs = player['last_seen']['player_name']
+            _prevs = [player['last_seen']['player_name']]
         else:
             _prevs = []
 
