@@ -20,7 +20,14 @@ from pull_tacobot import convert_data
 # args = parser.parse_args()
 
 infile = questionary.path("Enter path to input file -> ").ask()
+if infile is None:
+    print(f"Cancelled by user, Exiting")
+    exit(1)
+
 outfile = questionary.text("Output file name (blank for overwrite)").ask()
+if outfile is None:
+    print(f"Cancelled by user, Exiting")
+    exit(1)
 if outfile == '':
     _ow = questionary.confirm("Are you sure you want to overwite the TF2BD file?").ask()
     if not _ow:
@@ -28,8 +35,20 @@ if outfile == '':
     else:
         outfile = infile
 
-with open(infile, 'r') as h:
-    data = json.load(h)
+try:
+    with open(infile, 'r') as h:
+        data = json.load(h)
+    _expected_keys = ['$schema', 'file_info', 'players']
+    for key in _expected_keys:
+        if key not in data:
+            print(f"Unrecognised JSON format - likely not a TF2BD playerlist. The program may not work as expected.")
+            _resp = questionary.confirm("Would you like to continue with the conversion anyway?").ask()
+            if not _resp:
+                exit(1)
+except json.JSONDecodeError as e:
+    print("Unable to read file - improper JSON: ", e)
+    exit(1)
+
 
 output = convert_data(data['players'], custom_note='Converted from TF2BD list by automation.')
 

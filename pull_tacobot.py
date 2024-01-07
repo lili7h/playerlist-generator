@@ -35,10 +35,10 @@ def convert_data(players: dict, *, custom_note: str = None) -> dict:
             _verdict = 'Cheater'
         else:
             _verdict = 'Player'
-            _note = "Marked for: " + ", ".join(player["attributes"])
+            _custom_note = "Marked for: " + ", ".join(player["attributes"])
 
         _player_records['records'][convert_sid3_to_sid64(player['steamid'])] = {
-            'custom_data': {'playerNote': _note},
+            'custom_data': {'playerNote': _custom_note},
             'verdict': _verdict,
             'previous_names': _prevs
         }
