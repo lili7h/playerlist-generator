@@ -45,6 +45,8 @@ try:
             _resp = questionary.confirm("Would you like to continue with the conversion anyway?").ask()
             if not _resp:
                 exit(1)
+            else:
+                break
 except json.JSONDecodeError as e:
     print("Unable to read file - improper JSON: ", e)
     exit(1)
