@@ -4,3 +4,4 @@ cache/playerlist.json
 **/__pycache__/
 .idea/
 .vscode/
+playerlist*.json
