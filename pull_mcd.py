@@ -1,6 +1,7 @@
 import requests
 import json5
 import json
+import datetime
 
 from bs4 import BeautifulSoup
 from loguru import logger
@@ -42,11 +43,15 @@ def parse_html(html: str) -> list[dict]:
 def parse_to_mac_playerrecords_format(mcd_objects: list[dict]) -> dict:
     logger.info(f"Transforming {len(mcd_objects)} player objects into MAC Client format...")
     _player_records = {'records': {}}
+    _current_time = datetime.datetime.now().isoformat() + 'Z'
+
     for player in mcd_objects:
         _player_records['records'][player['id']] = {
             'custom_data': {'playerNote': 'Auto-extracted from pull_mcd.py'},
             'verdict': COLOUR_TO_VERDICT_MAP[player['color']['background']],
-            'previous_names': player['aliases']
+            'previous_names': player['aliases'],
+            'modified': _current_time,
+            'created': _current_time,
         }
     logger.success("Done.")
     return _player_records

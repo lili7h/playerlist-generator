@@ -1,4 +1,5 @@
 import requests
+import datetime
 
 from loguru import logger
 
@@ -37,10 +38,14 @@ def convert_data(players: dict, *, custom_note: str = None) -> dict:
             _verdict = 'Player'
             _custom_note = "Marked for: " + ", ".join(player["attributes"])
 
+        _current_time = datetime.datetime.now().isoformat() + 'Z'
+
         _player_records['records'][convert_sid3_to_sid64(player['steamid'])] = {
             'custom_data': {'playerNote': _custom_note},
             'verdict': _verdict,
-            'previous_names': _prevs
+            'previous_names': _prevs,
+            'modified': _current_time,
+            'created': _current_time,
         }
     logger.success("Done.")
     return _player_records

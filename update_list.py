@@ -3,6 +3,7 @@ import os.path
 import pull_mcd
 import pull_tacobot
 import orjson
+import datetime
 
 from loguru import logger
 
@@ -47,6 +48,7 @@ for _possible_new in _combined['records']:
         _past_names = _combined['records'][_possible_new]['previous_names']
         _possible_name = _past_names[0] if len(_past_names) > 0 else _possible_new
         logger.info(f"Added new data for new record for '{_possible_name}'")
+        _current_time = datetime.datetime.now().isoformat()
 
         _current['records'][_possible_new] = _combined['records'][_possible_new]
         _new_records += 1
