@@ -12,7 +12,7 @@ if __name__ == "__main__":
 
     _combined = {'records': _mcd_players['records'] | _tb_players['records']}
     if len(sys.argv) == 1:
-        with open('playerlist.json', 'w') as h:
+        with open('data/playerlist.json', 'w') as h:
             h.write(json.dumps(_combined))
             logger.success(f"Wrote data out to 'playerlist.json'.")
     else:

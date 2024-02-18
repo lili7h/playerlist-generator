@@ -67,7 +67,7 @@ def get_mac_format() -> dict:
 if __name__ == "__main__":
     print(f"Extracting player list from MCD...")
     _playerlist_mcd = parse_to_mac_playerrecords_format(parse_html(pull_html(MCD_URL)))
-    with open('playerlist.json', 'w') as h:
+    with open('data/playerlist.json', 'w') as h:
         h.write(json.dumps(_playerlist_mcd))
         print(f"Wrote data out to 'playerlist.json'.")
     print(f"Done.")
