@@ -1,8 +1,7 @@
 library/
 logs/
-data/playerlist.json
-cache/playerlist.json
+cache/*
 **/__pycache__/
+output/*.json
 .idea/
 .vscode/
-playerlist*.json

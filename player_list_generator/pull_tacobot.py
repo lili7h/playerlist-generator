@@ -21,7 +21,7 @@ def get_data(url: str) -> dict:
 
 def convert_data(players: dict, *, custom_note: str = None) -> dict:
     logger.info(f"Transforming {len(players)} player objects into MAC Client format...")
-    _note = 'Auto-extracted from pull_tacobot.py' if custom_note is None else custom_note
+    _note = '[Tacobot] Auto-extracted' if custom_note is None else custom_note
     _player_records = {'records': {}}
     for player in players:
         _prevs: list[str]
@@ -36,7 +36,7 @@ def convert_data(players: dict, *, custom_note: str = None) -> dict:
             _verdict = 'Cheater'
         else:
             _verdict = 'Player'
-            _custom_note = "Marked for: " + ", ".join(player["attributes"])
+            _custom_note = "[Tacobot] Marked for: " + ", ".join(player["attributes"])
 
         _current_time = datetime.datetime.now().isoformat() + 'Z'
 

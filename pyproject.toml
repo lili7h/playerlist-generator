@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "player-list-generator"
+version = "0.1.0"
+description = "Generate playerlist files for MAC by aggregating multiple different sources"
+authors = ["Lilith"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "player_list_generator"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+loguru = "^0.7.2"
+json5 = "^0.9.25"
+bs4 = "^0.0.2"
+questionary = "^2.0.1"
+orjson = "^3.10.3"
+jsonschema = "^4.22.0"
+requests = "^2.32.3"
+html5lib = "^1.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

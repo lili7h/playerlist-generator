@@ -43,8 +43,8 @@ else:
             requests.get(_list['$schema']).json(),
         ).validate(_list)
     except ValidationError as e:
-        if not os.path.exists('./logs/'):
-            os.mkdir('./logs')
+        if not os.path.exists('../logs/'):
+            os.mkdir('../logs')
         print(f"ERR: playerlist contained invalid json format according to its schema, potentially corrupt player file")
         _fn = Path(f"logs/pl-json-validation-err-{datetime.datetime.utcnow().strftime('%Y%m%d-%H%M%S')}.txt")
         with open(_fn, 'w', encoding='utf8') as h:
